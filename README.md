@@ -14,7 +14,7 @@ https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Trai
 https://medium.com/swlh/guide-to-tensorflow-object-detection-tensorflow-2-e55ba3cdbc03
 I am currently in progress of adding mouse functionality to the helmet, once that is done I will be writing a full guide on how to set it up and a youtube video with demonstration
 
-
+All of the links and resources I used are linked in the LinksUsed.md file
 
 
 
