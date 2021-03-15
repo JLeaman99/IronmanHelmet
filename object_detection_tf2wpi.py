@@ -8,12 +8,12 @@ import pyautogui
 import ctypes
 
 lock = False; 
-
+pyautogui.FAILSAFE = False;
 
 
 DATA_DIR = os.getcwd()
 MODELS_DIR = 'exported'
-MODEL_NAME = 'v2'
+MODEL_NAME = 'v3c2'
 MISC = 'annotations'
 PATH_TO_CKPT = os.path.join(MODELS_DIR, os.path.join(MODEL_NAME,'checkpoint/'))
 PATH_TO_CFG = os.path.join(MODELS_DIR, os.path.join(MODEL_NAME,'pipeline.config'))
@@ -63,9 +63,9 @@ category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABE
                                                                     use_display_name=True)
 
 video = cv2.VideoCapture('http://raspberrypi:8080/?action=stream')
-#video = cv2.VideoCapture('test.mp4')
-ret = video.set(3,640)
-ret = video.set(4,480)
+#video = cv2.VideoCapture('test2.mp4')
+ret = video.set(3,1280)
+ret = video.set(4,720)
 
 while True:
     # Read frame from camera
@@ -122,7 +122,15 @@ while True:
         lock = False
     
     print("Printing Detections");
-    print([category_index.get(value) for index,value in enumerate(detections['detection_classes'][0].numpy())]);
+    #print([category_index.get(value) for index,value in enumerate(detections['detection_classes'][0].numpy())]);
+    print(detections['detection_boxes'][0]);
+    #if([category_index.get(value) for index,value in enumerate(detections['detection_classes'][0].numpy())] == 'finger')
+    movex = detections['detection_boxes'][0][0][1].numpy()*1920;
+    movey = detections['detection_boxes'][0][0][0].numpy()*1080;
+    print(movex);
+  
+    pyautogui.moveTo(movex,movey);
+    
     print("Detections Done");
     if cv2.waitKey(25) & 0xFF == ord('q'):
         break
